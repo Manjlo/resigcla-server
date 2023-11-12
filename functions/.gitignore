@@ -1,7 +1,2 @@
 node_modules/
-
-.serviceAccount.json:
-  @echo "Please create a service account key and place it in the root directory of this project as .serviceAccountKey.json"
-  @echo "See https://firebase.google.com/docs/admin/setup for more information"
-  @exit 1
-
+serviceAccountKey.json
