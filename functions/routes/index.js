@@ -11,7 +11,6 @@ const app = express();
 app.use(cors(configCORS));
 app.use(handlerAuth);
 app.use(handlerError);
-app.use("*", handler404);
 
 
 // routers

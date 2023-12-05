@@ -2,25 +2,33 @@ const dbUser = require("./database");
 const validate = require("./models");
 
 const createUser = async (req, res) => {
-  const { user } = req.body;
-  const { error, value } = validate(user);
-  if (!error) {
-    const existsUser = await dbUser.getUserOnDb(user.uid);
-    if (existsUser.user) {
-      res.status(422).json({
-        message: "User already exists",
-      });
+  try {
+    console.log("hola");
+    const { user } = req.body;
+    const { error, value } = validate(user);
+    if (!error) {
+      const existsUser = await dbUser.getUserOnDb(user.id);
+      if (existsUser.user) {
+        res.status(422).json({
+          message: "User already exists",
+        });
+      } else {
+        const response = await dbUser.createUserOnDb(user);
+        res.status(response.code).json({
+          message: response.message,
+          code: response.code,
+        });
+      }
     } else {
-      const response = await dbUser.createUserOnDb(value);
-      res.status(response.code).json({
-        message: response.message,
+      console.log(error);
+      res.status(422).json({
+        message: error.message,
+        input: error.details[0].path[0],
       });
     }
-  } else {
-    res.status(422).json({
-      message: error.message,
-      input: error.details[0].path[0],
-    });
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 };
 

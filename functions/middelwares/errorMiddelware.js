@@ -2,7 +2,6 @@ const errorMiddleware = (err, req, res, next) => {
   if (!err.statusCode) {
     err.statusCode = 500;
   }
-
   switch (err.statusCode) {
   case 422:
     res.status(err.statusCode).json({

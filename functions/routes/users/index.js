@@ -3,7 +3,7 @@ const router = express.Router(); // eslint-disable-line new-cap
 const { createUser, getUserById } = require("./controller");
 
 
-router.post("/", createUser);
+router.post("/new", createUser);
 router.get("/:id", getUserById);
 
 

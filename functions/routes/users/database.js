@@ -3,7 +3,7 @@ const { USERS_COLLECTION } = require('../../firebase-admin/firebasePaths');
 
 
 const createUserOnDb = async (user) => {
-  await db.databaseCreateValue(USERS_COLLECTION, user.uid, user);
+  await db.databaseCreateValue(USERS_COLLECTION, user.id, user);
   const response = { code: 200, message: 'User created' };
   return response;
 };
